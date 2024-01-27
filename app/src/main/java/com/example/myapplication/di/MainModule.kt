@@ -1,6 +1,7 @@
 package com.example.myapplication.di
 
 import android.util.Log
+import com.example.myapplication.data.source.PersonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,4 +42,8 @@ object MainModule {
             url("https://randomuser.me/api/")
         }
     }
+
+    @Provides
+    @Singleton
+    fun providePersonRepository(httpClient: HttpClient) = PersonRepository(httpClient)
 }

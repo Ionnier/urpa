@@ -8,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
@@ -35,6 +36,9 @@ object MainModule {
                 isLenient = true
                 ignoreUnknownKeys = true
             })
+        }
+        defaultRequest {
+            url("https://randomuser.me/api/")
         }
     }
 }

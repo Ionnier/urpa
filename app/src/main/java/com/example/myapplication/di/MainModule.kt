@@ -1,8 +1,11 @@
 package com.example.myapplication.di
 
 import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.example.myapplication.data.source.PersonRepository
 import com.example.myapplication.domain.GetUsersUseCase
+import com.example.myapplication.domain.UserPagination
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,5 +54,16 @@ object MainModule {
     @Provides
     @Singleton
     fun provideUseCase(personRepository: PersonRepository) = GetUsersUseCase(personRepository)
+
+    @Provides
+    @Singleton
+    fun provideUserPagination(useCase: GetUsersUseCase, pagingConfig: PagingConfig) =
+        Pager(pagingConfig) {
+            UserPagination(useCase)
+        }
+
+    @Provides
+    @Singleton
+    fun providePagingConfig() = PagingConfig(pageSize = 20, initialLoadSize = 20, prefetchDistance = 3)
 
 }

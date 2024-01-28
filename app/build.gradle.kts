@@ -63,6 +63,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation ("com.google.dagger:hilt-android:2.48.1")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     val ktorVersion = "2.3.7"
 
@@ -73,6 +74,9 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.paging:paging-compose-android:3.3.0-alpha02")
 
     kapt ("com.google.dagger:hilt-compiler:2.48.1")
 

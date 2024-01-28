@@ -1,21 +1,23 @@
 package com.example.myapplication.domain
 
 import com.example.myapplication.data.source.PersonRepository
-import com.example.myapplication.models.Person
+import com.example.myapplication.models.User
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class GetUsersUseCase(
     private val repository: PersonRepository
 ) {
 
-    suspend fun execute(page: Int, results: Int): List<Person>? {
+    suspend fun execute(page: Int, results: Int): List<User>? {
         val personList = repository.getAll(page, results) ?: return null
         return personList.map {
-            Person(
+            User(
                 fullName = it.getFullName(),
                 age = it.getAge(),
                 countryCode = it.getCountryCode(),
-                time = it.getRandomTime()
+                time = it.getRandomTime(),
+                avatarURL = it.getAvatarURL()
             )
         }
     }
@@ -36,7 +38,13 @@ class GetUsersUseCase(
     }
 
     private fun com.example.myapplication.data.dtos.Person.getRandomTime(): String {
-        val date = this.dob?.date ?: ""
-        return date.split("T")[1].replace("Z", "")
+        val dateString = this.dob?.date ?: ""
+        val date =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(dateString) ?: return ""
+        return SimpleDateFormat("mm:ss", Locale.getDefault()).format(date)
+    }
+
+    private fun com.example.myapplication.data.dtos.Person.getAvatarURL(): String {
+        return this.picture?.link ?: ""
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="user_screen_subtitle">%1$d years from %2$s</string>
 </resources>

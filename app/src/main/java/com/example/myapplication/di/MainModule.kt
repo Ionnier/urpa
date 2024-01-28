@@ -2,6 +2,7 @@ package com.example.myapplication.di
 
 import android.util.Log
 import com.example.myapplication.data.source.PersonRepository
+import com.example.myapplication.domain.GetUsersUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,4 +47,9 @@ object MainModule {
     @Provides
     @Singleton
     fun providePersonRepository(httpClient: HttpClient) = PersonRepository(httpClient)
+
+    @Provides
+    @Singleton
+    fun provideUseCase(personRepository: PersonRepository) = GetUsersUseCase(personRepository)
+
 }
